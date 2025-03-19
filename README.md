@@ -1,116 +1,292 @@
-# [Movie Trends][link]
+<div align="center">
+  <br />
+    <a href="https://www.youtube.com/watch?v=f8Z9JyB2EIE" target="_blank">
+      <img src="https://github.com/user-attachments/assets/0cb17079-9b42-4a6f-9023-d82642fff73b" alt="Project Banner">
+    </a>
+  <br />
 
-<div style={{ textAlign: "center" }}>
+  <div>
+    <img src="https://img.shields.io/badge/-React_Native-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="React Native" />
+    <img src="https://img.shields.io/badge/-Expo-black?style=for-the-badge&logoColor=white&logo=expo&color=000020" alt="Expo" />
+    <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/-Appwrite-black?style=for-the-badge&logoColor=white&logo=appwrite&color=F02E65" alt="Appwrite" />
+  </div>
 
-  <img src="./assets/images/icon.png" style={{ width: "150px", height: "150px", borderRadius: "50%" }} />
+  <h3 align="center">A Movie Finding App with Extensive Search</h3>
+
+   <div align="center">
+     Build this project step by step with our detailed tutorial on <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a> YouTube. Join the JSM family!
+    </div>
 </div>
 
+## 📋 <a name="table">Table of Contents</a>
 
-> <div style={{ margin: 20, maxWidth: 700, lineHeight: "1.6" }}>
-  The Movie Trends app is a user-friendly platform designed to help movie enthusiasts discover trending movies with ease. Built with Expo, the app allows users to search for movies, view detailed information, and explore the cast involved in each production. With a smooth and intuitive interface, users can stay updated with the latest movies in real time.
-</div>
+1. 🤖 [Introduction](#introduction)
 
-## `Get Application`
+2. ⚙️ [Tech Stack](#tech-stack)
 
-<div style={{ display: "flex",  gap: "20px" }}>
-  <a href="#" target="_blank" rel="noopener noreferrer">
-    <img src="./assets/images/google-play-badge-logo-svgrepo-com.svg" alt="Google Play Store" style={{ width: "100px", height: "100px" }} />
-  </a>
-  <a href="#" target="_blank" rel="noopener noreferrer">
-    <img src="./assets/images/download-on-the-app-store-apple-logo-svgrepo-com.svg" alt="Apple App Store" style={{ width: "100px", height: "100px" }} />
-  </a>
-</div>
+3. 🔋 [Features](#features)
 
+4. 🤸 [Quick Start](#quick-start)
 
-### `screenshots`
+5. 🕸️ [Snippets (Code to Copy)](#snippets)
 
-<div style={{ textAlign: "center", display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center', width: "100%", margin: "auto" }}>
-<div style={{ textAlign: "center" }}>
-  <img src="./assets/images/screenshots/1.jpg" style={{ width: "300px", height: "650px", borderRadius: "5%" }} />
-</div>
-<div style={{ textAlign: "center" }}>
-  <img src="./assets/images/screenshots/2.jpg" style={{ width: "300px", height: "650px", borderRadius: "5%" }} />
-</div>
-<div style={{ textAlign: "center" }}>
-  <img src="./assets/images/screenshots/3.jpg" style={{ width: "300px", height: "650px", borderRadius: "5%" }} />
-</div>
-<div style={{ textAlign: "center" }}>
-  <img src="./assets/images/screenshots/4.jpg" style={{ width: "300px", height: "650px", borderRadius: "5%" }} />
-</div>
-<div style={{ textAlign: "center" }}>
-  <img src="./assets/images/screenshots/5.jpg" style={{ width: "300px", height: "650px", borderRadius: "5%" }} />
-</div>
-<div style={{ textAlign: "center" }}>
-  <img src="./assets/images/screenshots/6.jpg" style={{ width: "300px", height: "650px", borderRadius: "5%" }} />
-</div>
-</div>
+6. 🔗 [Assets](#links)
 
+7. 🚀 [More](#more)
 
+## 🚨 Tutorial
 
+This repository contains the code corresponding to an in-depth tutorial available on our YouTube channel, <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a>.
 
+If you prefer visual learning, this is the perfect resource for you. Follow our tutorial to learn how to build projects like these step-by-step in a beginner-friendly manner!
 
-## `Features`
+<a href="https://www.youtube.com/watch?v=f8Z9JyB2EIE" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/1736fca5-a031-4854-8c09-bc110e3bc16d" /></a>
 
-- Trending Movies: Displays a list of the most popular and trending movies.
+## <a name="introduction">🤖 Introduction</a>
 
-- Movie Search: Allows users to search for specific movies by title.
-- Movie Details: Provides detailed information for each movie, including synopsis, genre, release date, and ratings.
--Cast Information: Displays the main cast and crew of each movie, with biographies and roles.
--Real-time Updates: Automatically updates with the latest trending movies.
-- Responsive Design: Works seamlessly across different screen sizes, ensuring a great user experience on both mobile and tablets.
-- Fast and Lightweight: Optimized performance to deliver quick results, even on slower connections.
+Built with Expo, TypeScript, and Tailwind CSS, this app fetches movies and creates a popularity algorithm using Appwrite. It provides users with a seamless browsing experience, ranking movies based on various engagement metrics. The app leverages modern UI/UX principles for a responsive and visually appealing interface, ensuring real-world scalability and performance.
 
-## `Tech`
+If you're getting started and need assistance or face any bugs, join our active Discord community with over **50k+** members. It's a place where people help each other out.
 
-- React Native 
+<a href="https://discord.com/invite/n6EdbFJ" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/618f4872-1e10-42da-8213-1d69e486d02e" /></a>
+
+## <a name="tech-stack">⚙️ Tech Stack</a>
+
 - Expo
-- JavaScript
+
+- React Native
+
+- Appwrite
+
 - TypeScript
-- Nativewindcss / Tailwindcss
 
+- Tailwind CSS
 
+## <a name="features">🔋 Features</a>
 
-## `Get started`
+### Features of the Mobile Movie AppProject
 
-1. Install dependencies
+👉 **Real-time data**: Fetching and displaying real-time movie data
 
-   ```bash
-   npm install
-   ```
+👉 **Home Page**: Featured and discover movies
 
-2. Start the app
+👉 **Search Page**: Search for your favorite movies
 
-   ```bash
-    npx expo start
-   ```
+👉 **Popularity algorithm**: Track user searches to display the most popular movies
 
-In the output, you'll find options to open the app in a
+(etc)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+and many more, including code architecture and reusability.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## <a name="quick-start">🤸 Quick Start</a>
 
-## Get a fresh project
+Follow these steps to set up the project locally on your machine.
 
-When you're ready, run:
+**Prerequisites**
+
+Make sure you have the following installed on your machine:
+
+- [Git](https://git-scm.com/)
+
+- [Node.js](https://nodejs.org/en)
+
+- [npm](https://www.npmjs.com/) (Node Package Manager)
+
+**Cloning the Repository**
 
 ```bash
-npm run reset-project
+
+git clone https://github.com/adrianhajdin/rn-movie-app.git
+
+cd rn-movie-app
+
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+**Installation**
 
-## Learn more
+Install the project dependencies using npm:
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+npm install
+
+```
+
+**Set Up Environment Variables**
+
+Create a new file named `.env` in the root of your project and add the following content:
+
+```env
+
+EXPO_PUBLIC_MOVIE_API_KEY=
+
+EXPO_PUBLIC_APPWRITE_PROJECT_ID=
+
+EXPO_PUBLIC_APPWRITE_DATABASE_ID=
+
+EXPO_PUBLIC_APPWRITE_COLLECTION_ID=
 
 
-<!-- links  -->
-[link]: <https://github.com/nyambogahezron>
 
+```
+
+Replace the placeholder values with your actual TMDB API key, Appwrite project ID, Database ID, and Collection ID. You can obtain these credentials by signing up on the [Appwrite](https://cloud.appwrite.io/console/login), [TMDB](https://www.themoviedb.org/login).
+
+**Running the Project**
+
+```bash
+
+npx expo start
+
+```
+
+Open your ExpoGO app on your phone and scan the QR code to view the project.
+
+## <a name="snippets">🕸️ Snippets</a>
+
+<details>
+
+<summary><code>tailwind.config.js</code></summary>
+
+```typescript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#030014",
+        secondary: "#151312",
+        ratingBox: "#221F3D",
+        searchBar: "#0F0D23",
+        text: "#9CA4AB",
+        darkAccent: "#AB8BFF",
+        accentText: "#A8B5DB",
+        secondaryText: "#D6C7FF",
+      },
+    },
+  },
+  plugins: [],
+};
+```
+
+</details>
+
+<details>
+
+<summary><code>app/globals.css</code></summary>
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+</details>
+
+<details>
+
+<summary><code>interfaces/interfaces.d.ts</code></summary>
+
+```typescript
+interface Movie {
+  id: number;
+  title: string;
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface TrendingMovie {
+  searchTerm: string;
+  movie_id: number;
+  title: string;
+  count: number;
+  poster_url: string;
+}
+
+interface MovieDetails {
+  adult: boolean;
+  backdrop_path: string | null;
+  belongs_to_collection: {
+    id: number;
+    name: string;
+    poster_path: string;
+    backdrop_path: string;
+  } | null;
+  budget: number;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  homepage: string | null;
+  id: number;
+  imdb_id: string | null;
+  original_language: string;
+  original_title: string;
+  overview: string | null;
+  popularity: number;
+  poster_path: string | null;
+  production_companies: {
+    id: number;
+    logo_path: string | null;
+    name: string;
+    origin_country: string;
+  }[];
+  production_countries: {
+    iso_3166_1: string;
+    name: string;
+  }[];
+  release_date: string;
+  revenue: number;
+  runtime: number | null;
+  spoken_languages: {
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }[];
+  status: string;
+  tagline: string | null;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface TrendingCardProps {
+  movie: TrendingMovie;
+  index: number;
+}
+```
+
+</details>
+
+## <a name="links">🔗 Assets</a>
+
+- Assets used in the project can be found [here](https://drive.google.com/file/d/1_8eNj07rNS7B-JyCZ-lj1GtRYG03Ye-M/view)
+
+## <a name="more">🚀 More</a>
+
+**Advance your skills with Next.js Pro Course**
+
+Enjoyed creating this project? Dive deeper into our PRO courses for a richer learning adventure. They're packed with
+
+detailed explanations, cool features, and exercises to boost your skills. Give it a go!
+
+<a href="https://jsmastery.pro/next15" target="_blank">
+
+   <img src="https://github.com/user-attachments/assets/b8760e69-1f81-4a71-9108-ceeb1de36741" alt="Project Banner">
+
+</a>

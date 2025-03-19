@@ -1,52 +1,45 @@
 {
   "expo": {
-    "name": "Movie Threads",
-    "slug": "movie-threads",
-    "version": "2.0.0",
+    "name": "rn-movie-app",
+    "slug": "rn-movie-app",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.hezron.movieBox"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.hezron.Threads"
+      }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/logo.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        {
+  "expo-splash-screen": {
+    "backgroundColor": "#FFFFFF",
+    "image": "./assets/images/splash-icon.png",
+    "dark": {
+      "image": "./assets/images/splash-icon-dark.png",
+      "backgroundColor": "#000000"
+    },
+    "imageWidth": 240
+  }
+}
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "ab8ef381-0599-403e-912b-c1def8243448"
-      },
-      "EXPO_PUBLIC_MOVIE_API_KEY": "process.env.EXPO_PUBLIC_MOVIE_API_KEY"
-    },
-    "owner": "hezron",
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/ab8ef381-0599-403e-912b-c1def8243448"
     }
   }
 }
