@@ -3,8 +3,6 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { images } from '@/constants/images';
-
 const TrendingCard = ({
 	movie: { movie_id, title, poster_url },
 	index,

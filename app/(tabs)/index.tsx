@@ -7,19 +7,18 @@ import {
 	FlatList,
 	StyleSheet,
 	ImageBackground,
+	StatusBar,
 } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
-
 import useFetch from '@/services/usefetch';
-import { fetchMovies } from '@/services/api';
+import { fetchMovies, fetchTopTreandingMovies } from '@/services/api';
 import { getTrendingMovies } from '@/services/appwrite';
-
 import { images } from '@/constants/images';
-
 import MovieCard from '@/components/MovieCard';
 import TrendingCard from '@/components/TrendingCard';
 import MaqueeThreadsCard from '@/components/MaqueeCard';
 import HomeSearchBar from '@/components/HomeSearchBar';
+import MovieContainer from '@/components/MovieContainer';
 
 export default function Index() {
 	const router = useRouter();
@@ -36,11 +35,14 @@ export default function Index() {
 		error: moviesError,
 	} = useFetch(() => fetchMovies({ query: '' }));
 
+	const { data: upcommingMovies } = useFetch(() => fetchTopTreandingMovies());
+
 	const MaqueeImages = movies?.map((movie) => movie.poster_path);
 	const MovieTitles = movies?.map((movie) => movie.title);
 
 	return (
 		<View className='flex-1'>
+			<StatusBar barStyle='light-content' backgroundColor='transparent' />
 			<Image
 				style={[StyleSheet.absoluteFillObject]}
 				tintColor={'#0F0D23'}
@@ -68,7 +70,7 @@ export default function Index() {
 				className='flex-row items-center w-full'
 			>
 				<ScrollView
-					className='flex-1 px-3'
+					className='flex-1 px-2'
 					showsVerticalScrollIndicator={false}
 					contentContainerStyle={{ minHeight: '100%', paddingBottom: 10 }}
 				>
@@ -89,7 +91,7 @@ export default function Index() {
 							{trendingMovies && (
 								<View className='mt-10'>
 									<Text className='text-lg text-white font-bold mb-3'>
-										Trending Movies
+										Top Search {''}
 									</Text>
 									<FlatList
 										horizontal
@@ -108,26 +110,33 @@ export default function Index() {
 								</View>
 							)}
 
-							<>
-								<Text className='text-lg text-white font-bold mt-5 mb-3'>
-									Latest Movies
+							{/* Threading movies  */}
+							<View className='mt-10'>
+								<Text className='text-lg text-white font-bold mb-3'>
+									Threading Movies
 								</Text>
-
 								<FlatList
-									data={movies}
-									renderItem={({ item }) => <MovieCard {...item} />}
-									keyExtractor={(item) => item.id.toString()}
-									numColumns={3}
-									columnWrapperStyle={{
-										justifyContent: 'flex-start',
-										gap: 20,
-										paddingRight: 5,
-										marginBottom: 10,
+									horizontal
+									showsHorizontalScrollIndicator={false}
+									className='mb-4 mt-3'
+									data={upcommingMovies}
+									contentContainerStyle={{
+										gap: 2,
 									}}
-									className='mt-2 pb-32'
-									scrollEnabled={false}
+									renderItem={({ item }) => (
+										<MovieCard
+											{...item}
+											containerStyle='w-32'
+											imgStyle='w-32'
+										/>
+									)}
+									keyExtractor={(item) => item.id.toString()}
+									ItemSeparatorComponent={() => <View className='w-4' />}
 								/>
-							</>
+							</View>
+
+							{/* latest movies  */}
+							<MovieContainer title='Latest Movies' movies={movies || []} />
 						</View>
 					)}
 				</ScrollView>

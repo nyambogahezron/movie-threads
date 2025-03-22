@@ -1,9 +1,28 @@
-import { icons } from '@/constants/icons';
+import MovieContainer from '@/components/MovieContainer';
 import { images } from '@/constants/images';
-import { View, Text, Image } from 'react-native';
+import { fetchMovies } from '@/services/api';
+import useFetch from '@/services/usefetch';
+import { View, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Save = () => {
+	const { data: movies, loading } = useFetch(() =>
+		fetchMovies({
+			query: '',
+		})
+	);
+
+	if (loading) {
+		return (
+			<View className='flex-1 bg-primary'>
+				<ActivityIndicator
+					size='large'
+					color='#0000ff'
+					className='mt-10 self-center'
+				/>
+			</View>
+		);
+	}
 	return (
 		<SafeAreaView className='bg-primary flex-1'>
 			<Image
@@ -11,10 +30,14 @@ const Save = () => {
 				className='flex-1 absolute w-full z-0'
 				resizeMode='cover'
 			/>
-			<View className='flex justify-center items-center flex-1 flex-col gap-5'>
-				<Image source={icons.save} className='size-10' tintColor='#fff' />
-				<Text className='text-gray-500 text-base'>Save</Text>
-			</View>
+
+			<ScrollView
+				className='flex-1 px-2'
+				showsVerticalScrollIndicator={false}
+				contentContainerStyle={{ minHeight: '100%', paddingBottom: 10 }}
+			>
+				<MovieContainer movies={movies || []} title='Featured Movies' />
+			</ScrollView>
 		</SafeAreaView>
 	);
 };

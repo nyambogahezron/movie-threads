@@ -1,45 +1,63 @@
 {
-  "expo": {
-    "name": "rn-movie-app",
-    "slug": "rn-movie-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/logo.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        {
-  "expo-splash-screen": {
-    "backgroundColor": "#FFFFFF",
-    "image": "./assets/images/splash-icon.png",
-    "dark": {
-      "image": "./assets/images/splash-icon-dark.png",
-      "backgroundColor": "#000000"
-    },
-    "imageWidth": 240
-  }
-}
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
-  }
+	"expo": {
+		"name": "Movie Threads",
+		"slug": "movie-threads",
+		"version": "2.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/images/icon.png",
+		"scheme": "myapp",
+		"newArchEnabled": true,
+		"userInterfaceStyle": "automatic",
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.hezron.movieBox"
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/images/adaptive-icon.png",
+				"backgroundColor": "#ffffff"
+			},
+			"package": "com.hezron.Threads"
+		},
+		"web": {
+			"bundler": "metro",
+			"output": "static",
+			"favicon": "./assets/images/favicon.png"
+		},
+		"plugins": [
+			"expo-router",
+			[
+				"expo-splash-screen",
+				{
+					"backgroundColor": "#030014",
+					"resizeMode": "contain",
+					"imageWidth": 200,
+					"image": "./assets/images/splash-icon.png",
+					"dark": {
+						"image": "./assets/images/splash-icon-dark.png",
+						"backgroundColor": "#030014"
+					}
+				}
+			]
+		],
+		"experiments": {
+			"typedRoutes": true
+		},
+		"extra": {
+			"router": {
+				"origin": false
+			},
+			"eas": {
+				"projectId": "ab8ef381-0599-403e-912b-c1def8243448"
+			},
+			"EXPO_PUBLIC_MOVIE_API_KEY": "process.env.EXPO_PUBLIC_MOVIE_API_KEY"
+		},
+		"owner": "hezron",
+		"runtimeVersion": {
+			"policy": "appVersion"
+		},
+		"updates": {
+			"url": "https://u.expo.dev/ab8ef381-0599-403e-912b-c1def8243448"
+		}
+	}
 }

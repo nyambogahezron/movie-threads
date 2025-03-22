@@ -7,6 +7,7 @@ import Animated, {
 	SharedValue,
 	useSharedValue,
 } from 'react-native-reanimated';
+import { image500 } from '@/services/api';
 
 const width = Dimensions.get('window').width;
 
@@ -34,7 +35,7 @@ function Item({
 			<Image
 				source={{
 					uri: image
-						? `https://image.tmdb.org/t/p/w500${image}`
+						? image500(image)
 						: 'https://placehold.co/600x400/1a1a1a/FFFFFF.png',
 				}}
 				style={{ flex: 1, borderRadius: 16 }}

@@ -18,32 +18,13 @@ import { Text, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useFetch from '@/services/usefetch';
-import {
-	fetchMovieCredits,
-	fetchMovieDetails,
-	fetchRelatedMovies,
-} from '@/services/api';
-import MovieCasts from '@/components/MovieCasts';
+import { fetchPersonDetails, fetchPersonMovieCredits } from '@/services/api';
 import MovieContainer from '@/components/MovieContainer';
 
 const { width, height } = Dimensions.get('window');
 const IMG_HEIGHT = height * 0.6;
 
-interface MovieInfoProps {
-	label: string;
-	value?: string | number | null;
-}
-
-const MovieInfo = ({ label, value }: MovieInfoProps) => (
-	<View className='flex-col items-start justify-center mt-5'>
-		<Text className='text-light-200 font-normal text-sm'>{label}</Text>
-		<Text className='text-light-100 font-bold text-sm mt-2'>
-			{value || 'N/A'}
-		</Text>
-	</View>
-);
-
-export default function Details() {
+export default function CastInfo() {
 	const scrollRef = React.useRef<Animated.ScrollView>(null);
 	const scrollOffset = useSharedValue(0);
 
@@ -54,16 +35,13 @@ export default function Details() {
 	const router = useRouter();
 	const { id } = useLocalSearchParams();
 
-	const { data: movie, loading } = useFetch(() =>
-		fetchMovieDetails(id as string)
+	const { data: personalDetails, loading } = useFetch(() =>
+		fetchPersonDetails(id as string)
 	);
 
-	const { data: relatedMovies, loading: loadingCredits } = useFetch(() =>
-		fetchRelatedMovies(id as string)
+	const { data: movies, loading: loadingMovies } = useFetch(() =>
+		fetchPersonMovieCredits(id as string)
 	);
-
-	const { data: credits } = useFetch(() => fetchMovieCredits(id as string));
-	// console.log('credits', credits);
 
 	// image animation for parallax effect
 	const imageAnimatedStyle = useAnimatedStyle(() => {
@@ -97,8 +75,6 @@ export default function Details() {
 			}),
 		};
 	}, []);
-
-	//  set header options on layout effect
 
 	if (loading)
 		return (
@@ -148,7 +124,7 @@ export default function Details() {
 			>
 				<Animated.Image
 					source={{
-						uri: `https://image.tmdb.org/t/p/w500${movie?.poster_path}`,
+						uri: `https://image.tmdb.org/t/p/w500${personalDetails?.profile_path}`,
 					}}
 					style={[styles.image, imageAnimatedStyle]}
 					resizeMode='cover'
@@ -156,67 +132,61 @@ export default function Details() {
 
 				<View style={styles.contentContainer}>
 					<View className='flex-col items-start justify-center mt-5'>
-						<Text className='text-white font-bold text-xl'>{movie?.title}</Text>
-						<View className='flex-row items-center gap-x-1 mt-2'>
-							<Text className='text-light-200 text-sm'>
-								{movie?.release_date?.split('-')[0]} •
-							</Text>
-							<Text className='text-light-200 text-sm'>{movie?.runtime}m</Text>
-						</View>
-						<View className='flex-row items-center bg-dark-100 px-2 py-1 rounded-md gap-x-1 mt-2'>
-							<Ionicons name='star' size={13} color='yellow' />
-
-							<Text className='text-white font-bold text-sm'>
-								{Math.round(movie?.vote_average ?? 0)}/10
-							</Text>
-
-							<Text className='text-light-200 text-sm'>
-								({movie?.vote_count} votes)
-							</Text>
-						</View>
-						<MovieInfo label='Overview' value={movie?.overview} />
-						<MovieInfo
-							label='Genres'
-							value={movie?.genres?.map((g) => g.name).join(' • ') || 'N/A'}
-						/>
-						<View className='flex flex-row justify-between w-1/2'>
-							<MovieInfo
-								label='Budget'
-								value={`$${(movie?.budget ?? 0) / 1_000_000} million`}
-							/>
-							<MovieInfo
-								label='Revenue'
-								value={`$${Math.round(
-									(movie?.revenue ?? 0) / 1_000_000
-								)} million`}
-							/>
-						</View>
-						<MovieInfo
-							label='Production Companies'
-							value={
-								movie?.production_companies?.map((c) => c.name).join(' • ') ||
-								'N/A'
-							}
-						/>
-
-						{/* movie credits */}
-						<View className='mb-8 mt-5 border w-full'>
-							{!loadingCredits ? (
-								<MovieCasts cast={credits || []} />
-							) : (
-								<ActivityIndicator />
-							)}
-						</View>
-
-						{/* related movies  */}
-						{relatedMovies && (
-							<View className=' mt-5 w-full'>
-								<MovieContainer
-									movies={relatedMovies || []}
-									title='Related Movies'
-								/>
+						<>
+							<View className='mt-6'>
+								<Text className='text-3xl text-white font-bold text-center'>
+									{personalDetails?.name}
+								</Text>
+								<Text className='text-base text-neutral-500 f text-center'>
+									{personalDetails?.place_of_birth}
+								</Text>
 							</View>
-						)}
+							<View className='mx-1 p-4 mt-6 flex-row justify-around items-center bg-dark-100 rounded-lg overflow-hidden'>
+								<View className='border-r-2 border-neutral-400 px-2 items-center'>
+									<Text className='text-lg text-white font-bold text-center'>
+										Gender
+									</Text>
+									<Text className='text-neutral-300 text-sm'>
+										{' '}
+										{personalDetails?.gender == 1 ? 'Female' : 'Male'}
+									</Text>
+								</View>
+								<View className='border-r-2 border-neutral-400 px-2 items-center'>
+									<Text className='text-lg text-white font-bold text-center'>
+										Birthday
+									</Text>
+									<Text className='text-neutral-300 text-sm'>
+										{personalDetails?.birthday}
+									</Text>
+								</View>
+								<View className='border-r-2 border-neutral-400 px-2 items-center'>
+									<Text className='text-lg text-white font-bold text-center'>
+										Popularity
+									</Text>
+									<Text className='text-neutral-300 text-sm'>
+										{personalDetails?.popularity}%
+									</Text>
+								</View>
+								<View className=' px-2 items-center'>
+									<Text className='text-lg text-white font-bold text-center'>
+										Know For
+									</Text>
+									<Text className='text-neutral-300 text-sm'>
+										{personalDetails?.known_for_department}
+									</Text>
+								</View>
+							</View>
+							<View className='my-6 mx-4 space-y-2'>
+								<Text className='text-wite text-lg text-white'>Biography</Text>
+								<Text className='text-neutral-400 tracking-wide'>
+									{personalDetails?.biography || 'No biography available'}
+								</Text>
+							</View>
+						</>
+						{/* related movies  */}
+						<View className='mt-5 w-full'>
+							<MovieContainer movies={movies || []} title='Featured Movies' />
+						</View>
 					</View>
 				</View>
 			</Animated.ScrollView>
