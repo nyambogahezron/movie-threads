@@ -5,9 +5,6 @@ import {
 	ScrollView,
 	Image,
 	FlatList,
-	StyleSheet,
-	ImageBackground,
-	StatusBar,
 } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import useFetch from '@/services/usefetch';
@@ -19,6 +16,7 @@ import TrendingCard from '@/components/TrendingCard';
 import MaqueeThreadsCard from '@/components/MaqueeCard';
 import HomeSearchBar from '@/components/HomeSearchBar';
 import MovieContainer from '@/components/MovieContainer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Index() {
 	const router = useRouter();
@@ -41,13 +39,10 @@ export default function Index() {
 	const MovieTitles = movies?.map((movie) => movie.title);
 
 	return (
-		<View className='flex-1'>
-			<StatusBar barStyle='light-content' backgroundColor='transparent' />
+		<SafeAreaView className='bg-primary flex-1'>
 			<Image
-				style={[StyleSheet.absoluteFillObject]}
-				tintColor={'#0F0D23'}
-				source={images.bg}
-				className='absolute w-full z-0'
+				source={images.bg2}
+				className='flex-1 absolute w-full z-0'
 				resizeMode='cover'
 			/>
 			<Stack.Screen
@@ -64,83 +59,74 @@ export default function Index() {
 					),
 				}}
 			/>
-			<ImageBackground
-				source={images.bg}
-				resizeMode='cover'
-				className='flex-row items-center w-full'
+
+			<ScrollView
+				className='flex-1 px-2 '
+				showsVerticalScrollIndicator={false}
+				contentContainerStyle={{ minHeight: '100%', paddingBottom: 10 }}
 			>
-				<ScrollView
-					className='flex-1 px-2'
-					showsVerticalScrollIndicator={false}
-					contentContainerStyle={{ minHeight: '100%', paddingBottom: 10 }}
-				>
-					{moviesLoading || trendingLoading ? (
-						<ActivityIndicator
-							size='large'
-							color='#0000ff'
-							className='mt-10 self-center'
-						/>
-					) : moviesError || trendingError ? (
-						<Text>Error: {moviesError?.message || trendingError?.message}</Text>
-					) : (
-						<View className='flex-1 mt-5'>
-							{MaqueeImages && MaqueeImages.length > 0 && (
-								<MaqueeThreadsCard MaqueeImages={MaqueeImages} />
-							)}
+				{moviesLoading || trendingLoading ? (
+					<ActivityIndicator
+						size='large'
+						color='#0000ff'
+						className='mt-10 self-center'
+					/>
+				) : moviesError || trendingError ? (
+					<Text>Error: {moviesError?.message || trendingError?.message}</Text>
+				) : (
+					<View className='flex-1 mt-5'>
+						{MaqueeImages && MaqueeImages.length > 0 && (
+							<MaqueeThreadsCard MaqueeImages={MaqueeImages} />
+						)}
 
-							{trendingMovies && (
-								<View className='mt-10'>
-									<Text className='text-lg text-white font-bold mb-3'>
-										Top Search {''}
-									</Text>
-									<FlatList
-										horizontal
-										showsHorizontalScrollIndicator={false}
-										className='mb-4 mt-3'
-										data={trendingMovies}
-										contentContainerStyle={{
-											gap: 26,
-										}}
-										renderItem={({ item, index }) => (
-											<TrendingCard movie={item} index={index} />
-										)}
-										keyExtractor={(item) => item.movie_id.toString()}
-										ItemSeparatorComponent={() => <View className='w-4' />}
-									/>
-								</View>
-							)}
-
-							{/* Threading movies  */}
+						{trendingMovies && (
 							<View className='mt-10'>
 								<Text className='text-lg text-white font-bold mb-3'>
-									Threading Movies
+									Top Search {''}
 								</Text>
 								<FlatList
 									horizontal
 									showsHorizontalScrollIndicator={false}
 									className='mb-4 mt-3'
-									data={upcommingMovies}
+									data={trendingMovies}
 									contentContainerStyle={{
-										gap: 2,
+										gap: 26,
 									}}
-									renderItem={({ item }) => (
-										<MovieCard
-											{...item}
-											containerStyle='w-32'
-											imgStyle='w-32'
-										/>
+									renderItem={({ item, index }) => (
+										<TrendingCard movie={item} index={index} />
 									)}
-									keyExtractor={(item) => item.id.toString()}
+									keyExtractor={(item) => item.movie_id.toString()}
 									ItemSeparatorComponent={() => <View className='w-4' />}
 								/>
 							</View>
+						)}
 
-							{/* latest movies  */}
-							<MovieContainer title='Latest Movies' movies={movies || []} />
+						{/* Threading movies  */}
+						<View className='mt-10'>
+							<Text className='text-lg text-white font-bold mb-3'>
+								Threading Movies
+							</Text>
+							<FlatList
+								horizontal
+								showsHorizontalScrollIndicator={false}
+								className='mb-4 mt-3'
+								data={upcommingMovies}
+								contentContainerStyle={{
+									gap: 2,
+								}}
+								renderItem={({ item }) => (
+									<MovieCard {...item} containerStyle='w-32' imgStyle='w-32' />
+								)}
+								keyExtractor={(item) => item.id.toString()}
+								ItemSeparatorComponent={() => <View className='w-4' />}
+							/>
 						</View>
-					)}
-				</ScrollView>
-			</ImageBackground>
-		</View>
+
+						{/* latest movies  */}
+						<MovieContainer title='Latest Movies' movies={movies || []} />
+					</View>
+				)}
+			</ScrollView>
+		</SafeAreaView>
 	);
 }

@@ -4,7 +4,7 @@ import {
 	StyleSheet,
 	Dimensions,
 	TouchableOpacity,
-	StatusBar,
+	Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, {
@@ -18,8 +18,13 @@ import { Text, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useFetch from '@/services/usefetch';
-import { fetchPersonDetails, fetchPersonMovieCredits } from '@/services/api';
+import {
+	fetchPersonDetails,
+	fetchPersonMovieCredits,
+	image500,
+} from '@/services/api';
 import MovieContainer from '@/components/MovieContainer';
+import { images } from '@/constants/images';
 
 const { width, height } = Dimensions.get('window');
 const IMG_HEIGHT = height * 0.6;
@@ -84,8 +89,12 @@ export default function CastInfo() {
 		);
 
 	return (
-		<View style={styles.container}>
-			<StatusBar barStyle='light-content' backgroundColor='transparent' />
+		<SafeAreaView className='bg-primary flex-1'>
+			<Image
+				source={images.bg2}
+				className='flex-1 absolute w-full z-0'
+				resizeMode='cover'
+			/>
 			<Stack.Screen
 				options={{
 					headerBackVisible: false,
@@ -124,7 +133,7 @@ export default function CastInfo() {
 			>
 				<Animated.Image
 					source={{
-						uri: `https://image.tmdb.org/t/p/w500${personalDetails?.profile_path}`,
+						uri: image500(personalDetails?.profile_path),
 					}}
 					style={[styles.image, imageAnimatedStyle]}
 					resizeMode='cover'
@@ -190,7 +199,7 @@ export default function CastInfo() {
 					</View>
 				</View>
 			</Animated.ScrollView>
-		</View>
+		</SafeAreaView>
 	);
 }
 
@@ -221,7 +230,7 @@ const styles = StyleSheet.create({
 	header: {
 		height: 80,
 		width: width,
-		backgroundColor: '#030014',
+		backgroundColor: 'rgba(30, 32, 89,1)',
 	},
 	headerTitle: {
 		color: 'white',

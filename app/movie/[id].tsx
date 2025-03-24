@@ -4,6 +4,7 @@ import {
 	StyleSheet,
 	Dimensions,
 	TouchableOpacity,
+	Image,
 	StatusBar,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,9 +23,11 @@ import {
 	fetchMovieCredits,
 	fetchMovieDetails,
 	fetchRelatedMovies,
+	image500,
 } from '@/services/api';
 import MovieCasts from '@/components/MovieCasts';
 import MovieContainer from '@/components/MovieContainer';
+import { images } from '@/constants/images';
 
 const { width, height } = Dimensions.get('window');
 const IMG_HEIGHT = height * 0.6;
@@ -108,8 +111,13 @@ export default function Details() {
 		);
 
 	return (
-		<View style={styles.container}>
-			<StatusBar barStyle='light-content' backgroundColor='transparent' />
+		<SafeAreaView className='bg-primary flex-1'>
+			<StatusBar hidden={true} />
+			<Image
+				source={images.bg2}
+				className='flex-1 absolute w-full z-0'
+				resizeMode='cover'
+			/>
 			<Stack.Screen
 				options={{
 					headerBackVisible: false,
@@ -148,7 +156,7 @@ export default function Details() {
 			>
 				<Animated.Image
 					source={{
-						uri: `https://image.tmdb.org/t/p/w500${movie?.poster_path}`,
+						uri: image500(movie?.poster_path),
 					}}
 					style={[styles.image, imageAnimatedStyle]}
 					resizeMode='cover'
@@ -200,7 +208,7 @@ export default function Details() {
 						/>
 
 						{/* movie credits */}
-						<View className='mb-8 mt-5 border w-full'>
+						<View className='mb-8 mt-5 -ml-3 w-full'>
 							{!loadingCredits ? (
 								<MovieCasts cast={credits || []} />
 							) : (
@@ -220,15 +228,11 @@ export default function Details() {
 					</View>
 				</View>
 			</Animated.ScrollView>
-		</View>
+		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#030014',
-	},
 	image: {
 		height: IMG_HEIGHT,
 		width: '100%',
@@ -241,7 +245,6 @@ const styles = StyleSheet.create({
 		minHeight: height + IMG_HEIGHT,
 	},
 	contentContainer: {
-		backgroundColor: '#030014',
 		paddingHorizontal: 16,
 		paddingTop: 20,
 		paddingBottom: 40,
@@ -251,7 +254,7 @@ const styles = StyleSheet.create({
 	header: {
 		height: 80,
 		width: width,
-		backgroundColor: '#030014',
+		backgroundColor: 'rgba(30, 32, 89,1)',
 	},
 	headerTitle: {
 		color: 'white',

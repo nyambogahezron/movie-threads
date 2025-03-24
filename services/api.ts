@@ -14,23 +14,11 @@ export const image500 = (path: string | null | undefined): string => {
 	return path ? `${baseImageUrl}/w500${path}` : '';
 };
 
-export const image342 = (path: string | null | undefined): string => {
-	return path ? `${baseImageUrl}/w342${path}` : '';
-};
-
 export const image185 = (path: string | null | undefined): string => {
 	return path ? `${baseImageUrl}/w185${path}` : '';
 };
 
-export const image128 = (path: string | null | undefined): string => {
-	return path ? `${baseImageUrl}/w128${path}` : '';
-};
-
 // fallback function for API calls
-
-export const fallbackImage =
-	'https://www.movienewz.com/img/films/poster-holder.jpg';
-
 export const fallbackProfileImage =
 	'https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png';
 

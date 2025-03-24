@@ -3,10 +3,10 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const TrendingCard = ({
+export default function TrendingCard({
 	movie: { movie_id, title, poster_url },
 	index,
-}: TrendingCardProps) => {
+}: TrendingCardProps) {
 	return (
 		<Link href={`/movie/${movie_id}`} asChild>
 			<TouchableOpacity className='w-32 relative pl-5'>
@@ -41,6 +41,4 @@ const TrendingCard = ({
 			</TouchableOpacity>
 		</Link>
 	);
-};
-
-export default TrendingCard;
+}

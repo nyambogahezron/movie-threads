@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { TouchableOpacity, ImageBackground, View } from 'react-native';
 import Animated, {
 	useSharedValue,
 	useAnimatedStyle,
@@ -8,9 +8,8 @@ import Animated, {
 	runOnJS,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
-
-import { icons } from '@/constants/icons';
 import { images } from '@/constants/images';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeSearchBar({
 	onPress,
@@ -64,20 +63,13 @@ export default function HomeSearchBar({
 		<ImageBackground
 			source={images.bg}
 			resizeMode='cover'
-			className='flex-row items-center bg-dark-200  px-2 py-5 w-full'
+			className='flex-row items-center px-2 w-full'
 		>
-			<LinearGradient
-				colors={['#0F0D23', '#030014']}
-				locations={[0.5, 0.9]}
+			<View
 				style={{ flex: 1, borderRadius: 15 }}
-				className='flex-1 mt-2 flex-row items-center px-3 py-5 w-ful rounded-lg'
+				className='flex-1 flex-row items-center px-3 py-5 w-ful rounded-lg bg-dark-200'
 			>
-				<Image
-					source={icons.search}
-					className='w-5 h-5 ml-3'
-					resizeMode='contain'
-					tintColor='#AB8BFF'
-				/>
+				<Ionicons name='search' size={20} color='#AB8BFF' className='ml-2' />
 				<TouchableOpacity onPress={onPress}>
 					<Animated.View style={[animatedStyle, { marginLeft: 10 }]}>
 						<Animated.Text
@@ -90,7 +82,7 @@ export default function HomeSearchBar({
 						</Animated.Text>
 					</Animated.View>
 				</TouchableOpacity>
-			</LinearGradient>
+			</View>
 		</ImageBackground>
 	);
 }

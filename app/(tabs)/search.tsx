@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, FlatList, Image } from 'react-native';
-
 import { images } from '@/constants/images';
-import { icons } from '@/constants/icons';
-
 import useFetch from '@/services/usefetch';
 import { fetchMovies } from '@/services/api';
 import { updateSearchCount } from '@/services/appwrite';
-
 import SearchBar from '@/components/SearchBar';
 import MovieDisplayCard from '@/components/MovieCard';
 
@@ -66,7 +62,7 @@ const Search = () => {
 				contentContainerStyle={{ paddingBottom: 100 }}
 				ListHeaderComponent={
 					<>
-						<View className='my-8'>
+						<View className='mt-2 mb-4'>
 							<SearchBar
 								placeholder='Search for a movie'
 								value={searchQuery}
