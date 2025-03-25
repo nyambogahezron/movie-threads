@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	View,
 	StyleSheet,
 	Dimensions,
 	TouchableOpacity,
 	Image,
-	StatusBar,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, {
@@ -26,8 +25,10 @@ import {
 	image500,
 } from '@/services/api';
 import MovieCasts from '@/components/MovieCasts';
-import MovieContainer from '@/components/MovieContainer';
+import RelatedMovieContainer from '@/components/RelatedMovieContainer';
 import { images } from '@/constants/images';
+import { useFavorites } from '@/context/FavoritesContext';
+import { toast } from '@/lib/toast';
 
 const { width, height } = Dimensions.get('window');
 const IMG_HEIGHT = height * 0.6;
@@ -66,7 +67,36 @@ export default function Details() {
 	);
 
 	const { data: credits } = useFetch(() => fetchMovieCredits(id as string));
-	// console.log('credits', credits);
+
+	const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+	const [isFavorited, setIsFavorited] = useState(false);
+
+	useEffect(() => {
+		if (movie?.id) {
+			setIsFavorited(isFavorite(movie.id.toString()));
+		}
+	}, [movie?.id, isFavorite]);
+
+	const handleFavorite = async () => {
+		if (!movie) return;
+		try {
+			if (isFavorited) {
+				await removeFavorite(movie.id.toString());
+				toast('Removed from favorites');
+			} else {
+				await addFavorite(
+					'movie',
+					movie.id.toString(),
+					movie.poster_path ?? '',
+					movie.title
+				);
+				toast('Added to favorites');
+			}
+			setIsFavorited(!isFavorited);
+		} catch (error) {
+			toast('Error updating favorites');
+		}
+	};
 
 	// image animation for parallax effect
 	const imageAnimatedStyle = useAnimatedStyle(() => {
@@ -101,8 +131,6 @@ export default function Details() {
 		};
 	}, []);
 
-	//  set header options on layout effect
-
 	if (loading)
 		return (
 			<SafeAreaView className='bg-primary flex-1'>
@@ -111,8 +139,7 @@ export default function Details() {
 		);
 
 	return (
-		<SafeAreaView className='bg-primary flex-1'>
-			<StatusBar hidden={true} />
+		<View className='bg-primary flex-1'>
 			<Image
 				source={images.bg2}
 				className='flex-1 absolute w-full z-0'
@@ -138,8 +165,15 @@ export default function Details() {
 						</TouchableOpacity>
 					),
 					headerRight: () => (
-						<TouchableOpacity style={styles.bookmarkBtn}>
-							<Ionicons name='bookmark' size={24} color={'yellow'} />
+						<TouchableOpacity
+							style={styles.bookmarkBtn}
+							onPress={handleFavorite}
+						>
+							<Ionicons
+								name={isFavorited ? 'bookmark' : 'bookmark-outline'}
+								size={24}
+								color={isFavorited ? 'yellow' : 'white'}
+							/>
 						</TouchableOpacity>
 					),
 				}}
@@ -208,7 +242,7 @@ export default function Details() {
 						/>
 
 						{/* movie credits */}
-						<View className='mb-8 mt-5 -ml-3 w-full'>
+						<View className='mb-8 mt-5 -ml-3' style={{ width: width }}>
 							{!loadingCredits ? (
 								<MovieCasts cast={credits || []} />
 							) : (
@@ -218,8 +252,8 @@ export default function Details() {
 
 						{/* related movies  */}
 						{relatedMovies && (
-							<View className=' mt-5 w-full'>
-								<MovieContainer
+							<View className='mt-5 w-full'>
+								<RelatedMovieContainer
 									movies={relatedMovies || []}
 									title='Related Movies'
 								/>
@@ -228,7 +262,7 @@ export default function Details() {
 					</View>
 				</View>
 			</Animated.ScrollView>
-		</SafeAreaView>
+		</View>
 	);
 }
 
@@ -245,6 +279,7 @@ const styles = StyleSheet.create({
 		minHeight: height + IMG_HEIGHT,
 	},
 	contentContainer: {
+		backgroundColor: '#030014',
 		paddingHorizontal: 16,
 		paddingTop: 20,
 		paddingBottom: 40,

@@ -7,7 +7,6 @@ import Animated, {
 	Easing,
 	runOnJS,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
 import { images } from '@/constants/images';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -63,7 +62,7 @@ export default function HomeSearchBar({
 		<ImageBackground
 			source={images.bg}
 			resizeMode='cover'
-			className='flex-row items-center px-2 w-full'
+			className='flex-row items-center px-2 w-full pt-10'
 		>
 			<View
 				style={{ flex: 1, borderRadius: 15 }}

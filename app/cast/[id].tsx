@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -25,6 +25,8 @@ import {
 } from '@/services/api';
 import MovieContainer from '@/components/MovieContainer';
 import { images } from '@/constants/images';
+import { useFavorites } from '@/context/FavoritesContext';
+import { toast } from '@/lib/toast';
 
 const { width, height } = Dimensions.get('window');
 const IMG_HEIGHT = height * 0.6;
@@ -47,6 +49,36 @@ export default function CastInfo() {
 	const { data: movies, loading: loadingMovies } = useFetch(() =>
 		fetchPersonMovieCredits(id as string)
 	);
+
+	const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+	const [isFavorited, setIsFavorited] = useState(false);
+
+	useEffect(() => {
+		if (personalDetails?.id) {
+			setIsFavorited(isFavorite(personalDetails.id.toString()));
+		}
+	}, [personalDetails?.id, isFavorite]);
+
+	const handleFavorite = async () => {
+		if (!personalDetails) return;
+		try {
+			if (isFavorited) {
+				await removeFavorite(personalDetails.id.toString());
+				toast('Removed from favorites');
+			} else {
+				await addFavorite(
+					'cast',
+					personalDetails.id.toString(),
+					personalDetails.profile_path,
+					personalDetails.name
+				);
+				toast('Added to favorites');
+			}
+			setIsFavorited(!isFavorited);
+		} catch (error) {
+			toast('Error updating favorites');
+		}
+	};
 
 	// image animation for parallax effect
 	const imageAnimatedStyle = useAnimatedStyle(() => {
@@ -89,7 +121,7 @@ export default function CastInfo() {
 		);
 
 	return (
-		<SafeAreaView className='bg-primary flex-1'>
+		<View className='bg-primary flex-1'>
 			<Image
 				source={images.bg2}
 				className='flex-1 absolute w-full z-0'
@@ -115,8 +147,15 @@ export default function CastInfo() {
 						</TouchableOpacity>
 					),
 					headerRight: () => (
-						<TouchableOpacity style={styles.bookmarkBtn}>
-							<Ionicons name='bookmark' size={24} color={'yellow'} />
+						<TouchableOpacity
+							style={styles.bookmarkBtn}
+							onPress={handleFavorite}
+						>
+							<Ionicons
+								name={isFavorited ? 'bookmark' : 'bookmark-outline'}
+								size={24}
+								color={isFavorited ? 'yellow' : 'white'}
+							/>
 						</TouchableOpacity>
 					),
 				}}
@@ -142,16 +181,16 @@ export default function CastInfo() {
 				<View style={styles.contentContainer}>
 					<View className='flex-col items-start justify-center mt-5'>
 						<>
-							<View className='mt-6'>
+							<View className='mt-6 text-start'>
 								<Text className='text-3xl text-white font-bold text-center'>
 									{personalDetails?.name}
 								</Text>
-								<Text className='text-base text-neutral-500 f text-center'>
+								<Text className='text-start text-neutral-500 text-center'>
 									{personalDetails?.place_of_birth}
 								</Text>
 							</View>
 							<View className='mx-1 p-4 mt-6 flex-row justify-around items-center bg-dark-100 rounded-lg overflow-hidden'>
-								<View className='border-r-2 border-neutral-400 px-2 items-center'>
+								<View className='border-r-2 border-neutral-400  items-center'>
 									<Text className='text-lg text-white font-bold text-center'>
 										Gender
 									</Text>
@@ -173,7 +212,7 @@ export default function CastInfo() {
 										Popularity
 									</Text>
 									<Text className='text-neutral-300 text-sm'>
-										{personalDetails?.popularity}%
+										{personalDetails?.popularity.toFixed(2)}%
 									</Text>
 								</View>
 								<View className=' px-2 items-center'>
@@ -194,12 +233,15 @@ export default function CastInfo() {
 						</>
 						{/* related movies  */}
 						<View className='mt-5 w-full'>
-							<MovieContainer movies={movies || []} title='Featured Movies' />
+							<MovieContainer
+								movies={movies || []}
+								title={`Featured Movies (${movies?.length} )`}
+							/>
 						</View>
 					</View>
 				</View>
 			</Animated.ScrollView>
-		</SafeAreaView>
+		</View>
 	);
 }
 
@@ -220,7 +262,6 @@ const styles = StyleSheet.create({
 		minHeight: height + IMG_HEIGHT,
 	},
 	contentContainer: {
-		backgroundColor: '#030014',
 		paddingHorizontal: 16,
 		paddingTop: 20,
 		paddingBottom: 40,

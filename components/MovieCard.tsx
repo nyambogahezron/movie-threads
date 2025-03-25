@@ -18,7 +18,11 @@ export default function MovieCard({
 }: props) {
 	return (
 		<Link href={`/movie/${id}`} asChild>
-			<TouchableOpacity className={`${containerStyle}`}>
+			<TouchableOpacity
+				className={`${containerStyle}`}
+				hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+				activeOpacity={0.7}
+			>
 				<View className='relative'>
 					<Image
 						source={{

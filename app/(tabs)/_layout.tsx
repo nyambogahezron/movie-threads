@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(3, 0, 24, 0.8)',
 		borderRadius: 50,
 		marginHorizontal: 15,
-		marginBottom: 10,
+		marginBottom: 60,
 		height: 55,
 		position: 'absolute',
 		overflow: 'hidden',
