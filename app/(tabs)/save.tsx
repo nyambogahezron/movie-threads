@@ -10,9 +10,10 @@ import {
 	Text,
 	FlatList,
 	Dimensions,
+	TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link } from 'expo-router';
+import { router } from 'expo-router';
 
 const width = Dimensions.get('window').width;
 
@@ -30,10 +31,31 @@ const Save = () => {
 
 	if (!user) {
 		return (
-			<View className='flex-1 bg-primary'>
-				<Text>Please login to save your favorites</Text>
-				<Link href='/login'>Login</Link>
-			</View>
+			<SafeAreaView className='bg-primary flex-1 items-center justify-center'>
+				<Image
+					source={images.bg2}
+					className='flex-1 absolute w-full z-0'
+					resizeMode='cover'
+				/>
+				<Text className='text-white text-2xl font-bold mb-4' numberOfLines={1}>
+					Please login to save your favorites
+				</Text>
+
+				<TouchableOpacity
+					className='bg-white/20 p-4 rounded-lg w-[80%] items-center mt-5'
+					onPress={() => router.push('/(auth)/login')}
+				>
+					<Text className='text-white'>Login</Text>
+				</TouchableOpacity>
+
+				<Text className='text-white mt-4'>or</Text>
+				<TouchableOpacity
+					onPress={() => router.push('/(auth)/register')}
+					className='bg-blue-600 p-4 rounded-lg w-[80%] items-center mt-5'
+				>
+					<Text className='text-white'>Register</Text>
+				</TouchableOpacity>
+			</SafeAreaView>
 		);
 	}
 

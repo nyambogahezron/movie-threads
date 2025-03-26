@@ -3,7 +3,6 @@ import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/context/AuthContext';
 import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 
 const Profile = () => {
 	const { user, signOut } = useAuth();
@@ -27,13 +26,18 @@ const Profile = () => {
 				/>
 				<View className='flex-1 justify-center items-center px-6'>
 					<TouchableOpacity
-						className='bg-white/10 p-6 rounded-xl backdrop-blur-lg w-full max-w-sm items-center justify-center flex-row gap-2 -mt-40'
+						className='bg-white/20 p-4 rounded-lg w-[80%] items-center mt-5'
 						onPress={() => router.push('/(auth)/login')}
 					>
-						<Ionicons name='person-add' size={24} color='white' />
-						<Text className='text-2xl ml-2 font-bold text-white text-center text-accent'>
-							Add Account
-						</Text>
+						<Text className='text-white'>Login</Text>
+					</TouchableOpacity>
+
+					<Text className='text-white mt-4'>or</Text>
+					<TouchableOpacity
+						onPress={() => router.push('/(auth)/register')}
+						className='bg-blue-600 p-4 rounded-lg w-[80%] items-center mt-5'
+					>
+						<Text className='text-white'>Register</Text>
 					</TouchableOpacity>
 				</View>
 			</SafeAreaView>

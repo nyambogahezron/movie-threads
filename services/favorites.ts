@@ -2,8 +2,8 @@ import { databases } from '@/lib/appwrite';
 import { toast } from '@/lib/toast';
 import { ID, Query } from 'react-native-appwrite';
 
-const DATABASE_ID = '67da8c7a0015e0e82bd6';
-const COLLECTION_ID = '67e1ae1400007e61c1aa';
+const DATABASE_ID = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+const COLLECTION_ID = process.env.EXPO_PUBLIC_FAVORITE_COLLECTION_ID!;
 
 export type FavoriteType = 'movie' | 'cast';
 

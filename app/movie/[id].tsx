@@ -25,10 +25,10 @@ import {
 	image500,
 } from '@/services/api';
 import MovieCasts from '@/components/MovieCasts';
-import RelatedMovieContainer from '@/components/RelatedMovieContainer';
 import { images } from '@/constants/images';
 import { useFavorites } from '@/context/FavoritesContext';
 import { toast } from '@/lib/toast';
+import MovieContainer from '@/components/MovieContainer';
 
 const { width, height } = Dimensions.get('window');
 const IMG_HEIGHT = height * 0.6;
@@ -50,6 +50,7 @@ const MovieInfo = ({ label, value }: MovieInfoProps) => (
 export default function Details() {
 	const scrollRef = React.useRef<Animated.ScrollView>(null);
 	const scrollOffset = useSharedValue(0);
+	const [reLoading, setReLoading] = useState(true);
 
 	const scrollHandler = useAnimatedScrollHandler((event) => {
 		scrollOffset.value = event.contentOffset.y;
@@ -58,24 +59,42 @@ export default function Details() {
 	const router = useRouter();
 	const { id } = useLocalSearchParams();
 
-	const { data: movie, loading } = useFetch(() =>
-		fetchMovieDetails(id as string)
-	);
+	const {
+		data: movie,
+		loading,
+		refetch: refetchMovie,
+	} = useFetch(() => fetchMovieDetails(id as string));
 
-	const { data: relatedMovies, loading: loadingCredits } = useFetch(() =>
-		fetchRelatedMovies(id as string)
-	);
+	const {
+		data: relatedMovies,
+		loading: loadingCredits,
+		refetch: refetchRelated,
+	} = useFetch(() => fetchRelatedMovies(id as string));
 
-	const { data: credits } = useFetch(() => fetchMovieCredits(id as string));
+	const { data: credits, refetch: refetchCredits } = useFetch(() =>
+		fetchMovieCredits(id as string)
+	);
 
 	const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 	const [isFavorited, setIsFavorited] = useState(false);
 
 	useEffect(() => {
+		// Reset state
+		setReLoading(true);
+		setIsFavorited(false);
+		scrollOffset.value = 0;
+		scrollRef.current?.scrollTo({ y: 0, animated: false });
+
+		// Refetch all data when id changes
+		refetchMovie();
+		refetchRelated();
+		refetchCredits();
+
+		// Update favorite status after fetching movie
 		if (movie?.id) {
 			setIsFavorited(isFavorite(movie.id.toString()));
 		}
-	}, [movie?.id, isFavorite]);
+	}, [id]);
 
 	const handleFavorite = async () => {
 		if (!movie) return;
@@ -253,7 +272,7 @@ export default function Details() {
 						{/* related movies  */}
 						{relatedMovies && (
 							<View className='mt-5 w-full'>
-								<RelatedMovieContainer
+								<MovieContainer
 									movies={relatedMovies || []}
 									title='Related Movies'
 								/>
