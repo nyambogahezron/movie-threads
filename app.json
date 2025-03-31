@@ -1,7 +1,7 @@
 {
 	"expo": {
 		"name": "Movie Threads",
-		"slug": "movie-threads",
+		"slug": "movieBox",
 		"version": "2.0.0",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
@@ -50,7 +50,11 @@
 			"eas": {
 				"projectId": "ab8ef381-0599-403e-912b-c1def8243448"
 			},
-			"EXPO_PUBLIC_MOVIE_API_KEY": "process.env.EXPO_PUBLIC_MOVIE_API_KEY"
+			"EXPO_PUBLIC_MOVIE_API_KEY": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
+			"EXPO_PUBLIC_APPWRITE_PROJECT_ID": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
+			"EXPO_PUBLIC_APPWRITE_DATABASE_ID": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
+			"EXPO_PUBLIC_APPWRITE_COLLECTION_ID": "process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID",
+			"EXPO_PUBLIC_FAVORITE_COLLECTION_ID": "process.env.EXPO_PUBLIC_FAVORITE_COLLECTION_ID"
 		},
 		"owner": "hezron",
 		"runtimeVersion": {
