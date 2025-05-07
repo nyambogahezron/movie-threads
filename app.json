@@ -1,67 +1,69 @@
 {
-	"expo": {
-		"name": "Movie Threads",
-		"slug": "movieBox",
-		"version": "2.0.0",
-		"orientation": "portrait",
-		"icon": "./assets/images/icon.png",
-		"scheme": "myapp",
-		"newArchEnabled": true,
-		"userInterfaceStyle": "automatic",
-		"ios": {
-			"supportsTablet": true,
-			"bundleIdentifier": "com.hezron.movieBox"
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/images/adaptive-icon.png",
-				"backgroundColor": "#ffffff"
-			},
-			"package": "com.hezron.Threads"
-		},
-		"web": {
-			"bundler": "metro",
-			"output": "static",
-			"favicon": "./assets/images/favicon.png"
-		},
-		"plugins": [
-			"expo-router",
-			[
-				"expo-splash-screen",
-				{
-					"backgroundColor": "#030014",
-					"resizeMode": "contain",
-					"imageWidth": 200,
-					"image": "./assets/images/splash-icon.png",
-					"dark": {
-						"image": "./assets/images/splash-icon-dark.png",
-						"backgroundColor": "#030014"
-					}
-				}
-			]
-		],
-		"experiments": {
-			"typedRoutes": true
-		},
-		"extra": {
-			"router": {
-				"origin": false
-			},
-			"eas": {
-				"projectId": "ab8ef381-0599-403e-912b-c1def8243448"
-			},
-			"EXPO_PUBLIC_MOVIE_API_KEY": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
-			"EXPO_PUBLIC_APPWRITE_PROJECT_ID": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
-			"EXPO_PUBLIC_APPWRITE_DATABASE_ID": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
-			"EXPO_PUBLIC_APPWRITE_COLLECTION_ID": "process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID",
-			"EXPO_PUBLIC_FAVORITE_COLLECTION_ID": "process.env.EXPO_PUBLIC_FAVORITE_COLLECTION_ID"
-		},
-		"owner": "hezron",
-		"runtimeVersion": {
-			"policy": "appVersion"
-		},
-		"updates": {
-			"url": "https://u.expo.dev/ab8ef381-0599-403e-912b-c1def8243448"
-		}
-	}
+  "expo": {
+    "name": "Movie Threads",
+    "slug": "movieBox",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "newArchEnabled": true,
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hezron.movieBox"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.hezron.Threads"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#030014",
+          "resizeMode": "contain",
+          "imageWidth": 200,
+          "image": "./assets/images/splash-icon.png",
+          "dark": {
+            "image": "./assets/images/splash-icon-dark.png",
+            "backgroundColor": "#030014"
+          }
+        }
+      ],
+      "expo-font",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ab8ef381-0599-403e-912b-c1def8243448"
+      },
+      "EXPO_PUBLIC_MOVIE_API_KEY": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
+      "EXPO_PUBLIC_APPWRITE_PROJECT_ID": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
+      "EXPO_PUBLIC_APPWRITE_DATABASE_ID": "process.env.EXPO_PUBLIC_MOVIE_API_KEY",
+      "EXPO_PUBLIC_APPWRITE_COLLECTION_ID": "process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID",
+      "EXPO_PUBLIC_FAVORITE_COLLECTION_ID": "process.env.EXPO_PUBLIC_FAVORITE_COLLECTION_ID"
+    },
+    "owner": "hezron",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/ab8ef381-0599-403e-912b-c1def8243448"
+    }
+  }
 }
